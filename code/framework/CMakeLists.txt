@@ -145,6 +145,8 @@ if (WIN32)
         target_link_libraries(FrameworkClient Ultralight)
         target_link_options(FrameworkClient PUBLIC "-SAFESEH:NO")
     endif ()
+else ()
+    target_link_libraries(FrameworkClient Ultralight)
 endif ()
 
 # Custom defines

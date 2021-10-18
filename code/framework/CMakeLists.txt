@@ -102,11 +102,8 @@ endif()
 
 # Append the files to the target static library
 add_library(Framework STATIC ${FRAMEWORK_SRC})
-add_library(FrameworkServer STATIC ${FRAMEWORK_SERVER_SRC})
-
-if (WIN32)
 add_library(FrameworkClient STATIC ${FRAMEWORK_CLIENT_SRC})
-endif ()
+add_library(FrameworkServer STATIC ${FRAMEWORK_SERVER_SRC})
 
 find_package(OpenSSL REQUIRED)
 
@@ -124,14 +121,13 @@ endmacro()
 
 link_shared_deps(Framework)
 link_shared_deps(FrameworkServer)
+link_shared_deps(FrameworkClient)
 
 target_link_libraries(FrameworkServer mongoose NodeJS libsig)
+target_link_libraries(FrameworkClient DiscordSDK CefTarget)
 
 # OS specific libraries
 if (WIN32)
-    link_shared_deps(FrameworkClient)
-    target_link_libraries(FrameworkClient DiscordSDK CefTarget)
-
     target_link_directories(Framework PUBLIC ${CMAKE_SOURCE_DIR}/vendors/openssl/lib)
     target_link_libraries(Framework ws2_32 dbghelp crypt32 winmm iphlpapi psapi userenv)
 

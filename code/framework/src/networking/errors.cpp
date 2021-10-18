@@ -9,7 +9,8 @@
 #include "errors.h"
 
 namespace Framework::Networking {
-    std::unordered_map<SLNet::StartupResult, const char *> StartupErrors = {
+
+    std::unordered_map<SLNet::StartupResult, char *> StartupErrors = {
         {SLNet::RAKNET_ALREADY_STARTED, "Already started"},
         {SLNet::INVALID_SOCKET_DESCRIPTORS, "Invalid socket descriptors"},
         {SLNet::INVALID_MAX_CONNECTIONS, "Invalid max connections"},

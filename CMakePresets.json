@@ -7,29 +7,97 @@
     },
     "configurePresets": [
         {
-            "binaryDir": "${projectDir}\\build",
-            "cacheVariables": {
-                "BUILD_SHARED_LIBS": {
-                    "type": "BOOL",
-                    "value": ""
-                },
-                "BUILD_EXAMPLES": {
-                    "type": "BOOL",
-                    "value": "false"
-                }
-            },
-            "configuration": "RelWithDebInfo",
-            "description": "Default build using Ninja generator",
-            "displayName": "Default Config",
-            "generator": "Ninja",
-            "installDir": "${projectDir}\\out\\install\\${name}",
-            "name": "default"
-        }
-    ],
-    "buildPresets": [
+            "name": "ninja-generator",
+            "hidden": true,
+            "generator": "Ninja"
+        },
         {
-            "name": "default",
-            "configurePreset": "default"
+            "name": "x86",
+            "hidden": true,
+            "architecture": {
+                "value": "x86",
+                "strategy": "external"
+            }
+        },
+        {
+            "name": "x64",
+            "hidden": true,
+            "architecture": {
+                "value": "x64",
+                "strategy": "external"
+            }
+        },
+        {
+            "name": "build_options",
+            "hidden": true,
+            "binaryDir": "${sourceDir}/build-${presetName}",
+            "cacheVariables": {
+                "BUILD_SHARED_LIBS": "false",
+                "BUILD_EXAMPLES": "false",
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}"
+            }
+        },
+        {
+            "name": "release",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        },
+        {
+            "name": "debug",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "x64-release",
+            "displayName": "x64-Release",
+            "description": "x64-Release",
+
+            "inherits": [
+                "ninja-generator",
+                "x64",
+                "build_options",
+                "release"
+            ]
+        },
+        {
+            "name": "x64-debug",
+            "displayName": "x64-Debug",
+            "description": "x64-Debug",
+
+            "inherits": [
+                "ninja-generator",
+                "x64",
+                "build_options",
+                "debug"
+            ]
+        },
+        {
+            "name": "x86-release",
+            "displayName": "x86-Release",
+            "description": "x86-Release",
+
+            "inherits": [
+                "ninja-generator",
+                "x86",
+                "build_options",
+                "release"
+            ]
+        },
+        {
+            "name": "x86-debug",
+            "displayName": "x86-Debug",
+            "description": "x86-Debug",
+
+            "inherits": [
+                "ninja-generator",
+                "x86",
+                "build_options",
+                "debug"
+            ]
         }
     ]
 }

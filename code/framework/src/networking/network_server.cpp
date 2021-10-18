@@ -17,7 +17,7 @@ namespace Framework::Networking {
         SLNet::SocketDescriptor newSocketSd = SLNet::SocketDescriptor(port, host.c_str());
         SLNet::StartupResult result = _peer->Startup(maxPlayers, &newSocketSd, 1);
         if (result != SLNet::RAKNET_STARTED) {
-            Logging::GetLogger(FRAMEWORK_INNER_NETWORKING)->critical("Failed to init the networking peer. Reason: {}", StartupErrors[result]);
+            Logging::GetLogger(FRAMEWORK_INNER_NETWORKING)->critical("Failed to init the networking peer. Reason:");
             return SERVER_PEER_FAILED;
         }
 
